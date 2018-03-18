@@ -3,7 +3,7 @@ package shakti.winter.expression;
 import java.util.List;
 import java.util.Map;
 
-import shakti.winter.Pair;
+import shakti.winter.tools.*;
 
 /**
  * Data pyramid, has hierachy of data types, that define the dimensionality 

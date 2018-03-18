@@ -1,6 +1,6 @@
 package shakti.winter.expression;
 
-import shakti.winter.Tools;
+import shakti.winter.tools.*;
 
 public abstract class BinaryOperator<Arg, Res> extends Operator<Arg, Res>{
 	

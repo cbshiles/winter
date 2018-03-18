@@ -3,7 +3,7 @@ package shakti.winter.rand;
 import java.util.ArrayList;
 import java.util.List;
 
-import shakti.winter.Pair;
+import shakti.winter.tools.*;
 import shakti.winter.expression.Operator;
 
 public class Mixer<T>{
