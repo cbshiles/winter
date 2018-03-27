@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
+package shakti.winter.operator;
 
 public class Greater extends BinaryOperator<Integer, Boolean>{
 
 	public Greater() {
-		super(">");
+		super(">", Integer.class, Boolean.class);
 	}
 	
 	@Override

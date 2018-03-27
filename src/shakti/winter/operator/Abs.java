@@ -1,12 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
-import shakti.winter.expression.UnaryOperator;
+package shakti.winter.operator;
 
 public class Abs extends UnaryOperator<Integer, Integer>{
 
 	public Abs() {
-		super("");
+		super("", Integer.class, Integer.class);
 	}
 
 	@Override

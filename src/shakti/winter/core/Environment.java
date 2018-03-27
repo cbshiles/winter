@@ -14,7 +14,7 @@ public class Environment {
 	beings = new ArrayList<>();
 	for (Pair<Mind, Integer> pear: makeLzt){
 	    for (int i=0; i<pear.b; i++){
-		beings.add(new Being(pear.a.copy()));
+		beings.add(new Being(pear.a.mutate()));
 	    }
 	}
     }
@@ -32,7 +32,7 @@ public class Environment {
     public String kalpa(ConfigEnv ce){
 	int turn = 0;
 	boolean over = false;
-	String msg;
+	String msg = "";
 	while (!over){
 	    System.out.println("Round "+turn+": "+beings.size()+" beings.");
 	    for (Being b: beings) {

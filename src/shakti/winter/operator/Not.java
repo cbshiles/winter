@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.UnaryOperator;
+package shakti.winter.operator;
 
 public class Not extends UnaryOperator<Boolean, Boolean>{
 
 	public Not() {
-		super("!");
+		super("!", Boolean.class, Boolean.class);
 	}
 	
 	@Override

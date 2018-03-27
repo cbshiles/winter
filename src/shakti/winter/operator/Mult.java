@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
+package shakti.winter.operator;
 
 public class Mult extends BinaryOperator<Integer, Integer>{
 
 	public Mult() {
-		super("*");
+		super("*", Integer.class, Integer.class);
 	}
 	
 	@Override

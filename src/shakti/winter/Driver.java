@@ -1,14 +1,12 @@
 package shakti.winter;
 
-import java.util.ArrayList;
-import java.util.List;
 import shakti.winter.core.*;
-import shakti.winter.expression.tree.Tree;
+import shakti.winter.tree.Tree;
 
 public class Driver {
 	
 	public static void main(String[] args) {
-	    Environment env = new Environment(new Tree(), 10);
+	    Environment env = new Environment(new Tree(), 2);
 	    ConfigEnv conf = new ConfigEnv();
 	    System.out.println(env.kalpa(conf));
 	}

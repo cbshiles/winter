@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
+package shakti.winter.operator;
 
 public class Equal extends BinaryOperator<Integer, Boolean>{
 
 	public Equal() {
-		super("==");
+		super("==", Integer.class, Boolean.class);
 	}
 	
 	@Override

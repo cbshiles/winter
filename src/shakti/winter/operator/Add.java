@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
+package shakti.winter.operator;
 
 public class Add extends BinaryOperator<Integer, Integer>{
 
 	public Add() {
-		super("+");
+		super("+", Integer.class, Integer.class);
 	}
 
 	@Override

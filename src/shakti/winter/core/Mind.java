@@ -20,9 +20,4 @@ public interface Mind {
      * @return While any Mind can be returned from this method, modifying the Mind that was successful enough to have its mutate method called seems like a sound evolutionary strategy.
      */
     public Mind mutate();
-
-    /**
-     * Copy this mind.
-     */
-    public Mind copy();
 }

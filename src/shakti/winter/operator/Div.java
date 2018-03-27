@@ -1,11 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
+package shakti.winter.operator;
 
 public class Div extends BinaryOperator<Integer, Integer>{
 
 	public Div() {
-		super("/");
+		super("/", Integer.class, Integer.class);
 	}
 	
 	@Override

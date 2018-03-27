@@ -1,12 +1,9 @@
-package shakti.winter.expression.operator;
-
-import shakti.winter.expression.BinaryOperator;
-import shakti.winter.expression.UnaryOperator;
+package shakti.winter.operator;
 
 public class And extends BinaryOperator<Boolean, Boolean>{
 
 	public And() {
-		super("&&");
+		super("&&", Boolean.class, Boolean.class);
 	}
 
 	@Override
