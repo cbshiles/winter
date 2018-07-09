@@ -21,6 +21,13 @@ public class Branch<ARG, RET> implements Node<RET>{
 	}
 	
 	/**
+	 * Empty constructor for custom branch types.
+	 */
+	public Branch() {
+		
+	}
+	
+	/**
 	 * Method that simplifies expressions that don't have variables.
 	 * ex. Replacing 2+2 with 4 
 	 */
@@ -28,8 +35,20 @@ public class Branch<ARG, RET> implements Node<RET>{
 	public RET simplify() {
 		if (!isVariable()) {
 			return pull();
+		} else {
+			//make extra kid list
+			List<Node<ARG>> newKidLzt = new ArrayList<>();
+			for (Node<ARG> kid: kids) {
+				ARG simp = kid.simplify();
+				if (simp != null) {
+					newKidLzt.add(new Leaf<ARG>(simp));
+				} else {
+					newKidLzt.add(kid);
+				}
+			}
+			kids = newKidLzt;
+			return null;
 		}
-		return null;
 	}
 	
 	@Override

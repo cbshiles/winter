@@ -67,14 +67,25 @@ public class Kiosk {
 		potatoes.update(pots);
 	}
 	
-	public static <ARG> List<Node<ARG>> kidList(Operator<ARG, ?> op) {
+	public static <ARG> Node<ARG> kid(Class<ARG> argClass) {
+		String argClassName = argClass.getName();
+		return Randomizer.getP() < .5 ? (Leaf<ARG>) constantMap.getRandom(argClassName)
+				: (Randomizer.getP() < .9 ? new Branch((Operator<?, ARG>) retMap.getRandom(argClassName)) 
+						: new TernaryBranch<>(argClass));
+		
+	}
+	
+	public static <ARG> List<Node<ARG>> kidList(int n, Class<ARG> argClass) {
+		
 		List<Node<ARG>> kids = new ArrayList<>();
-		String argClass = op.argClass.getName();
-		for (int i = 0; i < op.nargs; i++) {
-			kids.add(Randomizer.getP() < .5 ? (Leaf<ARG>) constantMap.getRandom(argClass)
-					: new Branch((Operator<?, ARG>) retMap.getRandom(argClass)));
+		for (int i = 0; i < n; i++) {
+			kids.add(kid(argClass));
 		}
 		return kids;
+	}
+	
+	public static <ARG> List<Node<ARG>> kidList(Operator<ARG, ?> op) {
+		return kidList(op.nargs, op.argClass);
 	}
 	
 }

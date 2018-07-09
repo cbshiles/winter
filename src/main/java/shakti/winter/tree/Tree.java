@@ -4,8 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import shakti.winter.core.Environment;
-import shakti.winter.core.Mind;
+import shakti.winter.tree.Branch;
+import shakti.winter.winter.Mind;
 import shakti.winter.operator.UnaryOperator;
+import shakti.winter.tools.Tools;
 
 public class Tree extends Branch<Boolean, Boolean> implements Mind{
 	
@@ -23,6 +25,11 @@ public class Tree extends Branch<Boolean, Boolean> implements Mind{
 			}
 		});		
 		this.first = first;
+		Boolean simp = this.simplify();
+		if (simp != null) {
+			kids = Tools.listIt(new Leaf<>(simp));
+		}
+		
 	}
 	
 	public Tree() {
@@ -48,6 +55,7 @@ public class Tree extends Branch<Boolean, Boolean> implements Mind{
 	}
 	
 	private Tree mutantCopy() {
+		//TODO: fix it
 		return this;	
 	}
 
