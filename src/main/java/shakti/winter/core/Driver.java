@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import shakti.winter.core.*;
 import shakti.winter.tree.Tree;
+import shakti.winter.winter.ConfigEnv;
 import shakti.winter.winter.WinterEnv;
 
 public class Driver {
@@ -16,7 +17,7 @@ public class Driver {
 	public static void main(String[] args) {
 		long start = System.nanoTime();
 	    Environment env = new WinterEnv(new Tree(), 10000);
-	    env.kalpa();
+	    env.kalpa(new ConfigEnv());
 	    log.info("time: "+((System.nanoTime()-start)/1000000000.0));
 	}
 }

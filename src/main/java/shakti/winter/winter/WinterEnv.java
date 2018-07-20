@@ -6,55 +6,40 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import shakti.winter.core.Being;
 import shakti.winter.core.Environment;
 import shakti.winter.tools.Pair;
 
-public class WinterEnv extends Environment{
+public class WinterEnv extends Environment<WinterBeing>{
+	
+	private static final Logger log = LogManager.getLogger(WinterEnv.class);
 	
 	public WinterEnv(List<Pair<Mind, Integer>> makeLzt) {
-		super(makeLzt);
+		super(makeLzt, new WinterBeing(null));
 	}
 	
 	public WinterEnv(Mind m, int c) {
-		super(m, c);
+		super(m, c, new WinterBeing(null));
 	}
 
-	private static final Logger log = LogManager.getLogger(WinterEnv.class);
-	
-	@Override
-	public void kalpa() {
-		kalpa(new ConfigEnv());
-	}
 	
 	/**
 	 * One complete aeon of the winter game.
 	 * @param ce  ConfigEnv to set settings.
 	 */
-	public void kalpa(ConfigEnv ce) {
-		int turn = 0;
-		boolean over = false;
-		String msg = "";
-		while (!over) {
-			log.info("Round " + turn + ": " + beings.size() + " beings.");
-
-			cycle(ce.getTurns());
-			if (turn++ >= ce.maxTurn) {
-				msg = "Final turn reached";
-				over = true;
-			}
-			if (beings.size() == 0) {
-				msg = "No beings left";
-				over = true;
-			}
-			if (beings.size() > ce.maxBeings) {
-				msg = "Number of beings exceeds allowed limits";
-				over = true;
-			}
-		}
-		log.info(msg + "\n Turn: " + turn + "\n # of Beings Alive: " + beings.size());
-		for (Being b : beings) {
+	@Override
+	public String kalpa(ConfigEnv ce) {
+		String msg = super.kalpa(ce);
+		log.info(msg + "# of Beings Alive: " + beings.size());
+		for (WinterBeing b : beings) {
 			log.info(b.prevPot + " potates - " + b.prevWarmth + " warmth - Total: " + b.getTotal() + " " + b);
 		}
+		return msg;
+	}
+	
+	@Override
+	public void cycle(ConfigEnv ce) {
+		cycle(ce.getTurns());
 	}
 
 	/**
@@ -66,13 +51,13 @@ public class WinterEnv extends Environment{
 	private void cycle(int turns) {
 
 		for (int tl = turns - 1; tl >= 0; tl--) {
-			for (Being ob : beings) {
+			for (WinterBeing ob : beings) {
 				ob.act(tl);
 			}
 		}
 
-		List<Being> newBeings = new ArrayList<>();
-		for (Being ob : beings) {
+		List<WinterBeing> newBeings = new ArrayList<>();
+		for (WinterBeing ob : beings) {
 			int cold = turns;
 			if (turns > 10)
 				cold++; // rate 1*turn -- added plus 1 for difficulty

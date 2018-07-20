@@ -6,15 +6,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import shakti.winter.tools.*;
-import shakti.winter.winter.Being;
 import shakti.winter.winter.ConfigEnv;
 import shakti.winter.winter.Mind;
 
-public abstract class Environment {
+public abstract class Environment<BEING extends Being<BEING>> {
 
 	private static final Logger log = LogManager.getLogger(Environment.class);
 
-	protected List<Being> beings;
+	protected List<BEING> beings;
 	
 	/**
 	 * @param makeLzt
@@ -24,11 +23,11 @@ public abstract class Environment {
 	 *            type of Mind. So you get 20 copies of this mind, 40 copies of that
 	 *            mind, etc
 	 */
-	public Environment(List<Pair<Mind, Integer>> makeLzt) {
+	public Environment(List<Pair<Mind, Integer>> makeLzt, BEING being) {
 		beings = new ArrayList<>();
 		for (Pair<Mind, Integer> pear : makeLzt) {
 			for (int i = 0; i < pear.b; i++) {
-				beings.add(new Being(pear.a.mutate()));
+				beings.add(being.create(pear.a.mutate()));
 			}
 		}
 	}
@@ -37,13 +36,40 @@ public abstract class Environment {
 	 * Creates an Environment with a single Mind type. See other constructor for
 	 * full details.
 	 */
-	public Environment(Mind m, int c) {
-		this(Tools.listIt(new Pair<Mind, Integer>(m, c)));
+	public Environment(Mind m, int c, BEING being) {
+		this(Tools.listIt(new Pair<Mind, Integer>(m, c)), being);
 	}
 
 	/**
-	 * One aeon of a game.
+	 * One aeon of a game. Returns a message.
 	 */
-	public abstract void kalpa();
+	public String kalpa(ConfigEnv ce) {
+		int turn = 0;
+		boolean over = false;
+		String msg = "";
+		while (!over) {
+			log.info("Round " + turn + ": " + beings.size() + " beings.");
+
+			cycle(ce);
+			if (turn++ >= ce.maxTurn) {
+				msg = "Final turn reached";
+				over = true;
+			}
+			if (beings.size() == 0) {
+				msg = "No beings left";
+				over = true;
+			}
+			if (beings.size() > ce.maxBeings) {
+				msg = "Number of beings exceeds allowed limits";
+				over = true;
+			}
+		}
+		return msg + "\n Turn: " + turn + "\n";
+	}
+	
+	/**
+	 * One turn of a game.
+	 */
+	public abstract void cycle(ConfigEnv ce);
 	
 }

@@ -23,4 +23,8 @@ public class ConfigEnv {
     	log.info(rand);
     	return  last = rand;//turnFlag?5:40;
     }
+    
+    public int getGuessingTurns() {
+    	return 15;
+    }
 }
