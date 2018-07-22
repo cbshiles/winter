@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shakti.winter.core.Being;
+import shakti.winter.tree.WinterTree;
 
-public class WinterBeing extends Being<WinterBeing> {
+public class WinterBeing extends Being<WinterTree, WinterBeing> {
 
-	public WinterBeing(Mind m) {
+	public WinterBeing(WinterTree m) {
 		super(m);
 		// TODO Auto-generated constructor stub
 	}
@@ -53,7 +54,7 @@ public class WinterBeing extends Being<WinterBeing> {
     }
 
 	@Override
-	public WinterBeing create(Mind m) {
+	public WinterBeing create(WinterTree m) {
 		return new WinterBeing(m);
 	}
 }

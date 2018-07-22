@@ -8,17 +8,19 @@ import org.apache.logging.log4j.Logger;
 
 import shakti.winter.core.Being;
 import shakti.winter.core.Environment;
+import shakti.winter.guessing.GuessTree;
 import shakti.winter.tools.Pair;
+import shakti.winter.tree.WinterTree;
 
-public class WinterEnv extends Environment<WinterBeing>{
+public class WinterEnv extends Environment<WinterTree, WinterBeing>{
 	
 	private static final Logger log = LogManager.getLogger(WinterEnv.class);
 	
-	public WinterEnv(List<Pair<Mind, Integer>> makeLzt) {
+	public WinterEnv(List<Pair<WinterTree, Integer>> makeLzt) {
 		super(makeLzt, new WinterBeing(null));
 	}
 	
-	public WinterEnv(Mind m, int c) {
+	public WinterEnv(WinterTree m, int c) {
 		super(m, c, new WinterBeing(null));
 	}
 

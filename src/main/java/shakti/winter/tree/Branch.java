@@ -7,7 +7,7 @@ import shakti.winter.operator.Operator;
 
 public class Branch<ARG, RET> implements Node<RET>{
 	
-	List<Node<ARG>> kids;
+	protected List<Node<ARG>> kids;
 	Operator<ARG, RET> op;
 	
 	/**

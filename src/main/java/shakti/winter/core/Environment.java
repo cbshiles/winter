@@ -9,7 +9,7 @@ import shakti.winter.tools.*;
 import shakti.winter.winter.ConfigEnv;
 import shakti.winter.winter.Mind;
 
-public abstract class Environment<BEING extends Being<BEING>> {
+public abstract class Environment<MIND extends Mind, BEING extends Being<MIND, BEING>> {
 
 	private static final Logger log = LogManager.getLogger(Environment.class);
 
@@ -23,11 +23,11 @@ public abstract class Environment<BEING extends Being<BEING>> {
 	 *            type of Mind. So you get 20 copies of this mind, 40 copies of that
 	 *            mind, etc
 	 */
-	public Environment(List<Pair<Mind, Integer>> makeLzt, BEING being) {
+	public Environment(List<Pair<MIND, Integer>> makeLzt, BEING being) {
 		beings = new ArrayList<>();
-		for (Pair<Mind, Integer> pear : makeLzt) {
+		for (Pair<MIND, Integer> pear : makeLzt) {
 			for (int i = 0; i < pear.b; i++) {
-				beings.add(being.create(pear.a.mutate()));
+				beings.add(being.create((MIND) pear.a.mutate()));
 			}
 		}
 	}
@@ -36,8 +36,8 @@ public abstract class Environment<BEING extends Being<BEING>> {
 	 * Creates an Environment with a single Mind type. See other constructor for
 	 * full details.
 	 */
-	public Environment(Mind m, int c, BEING being) {
-		this(Tools.listIt(new Pair<Mind, Integer>(m, c)), being);
+	public Environment(MIND m, int c, BEING being) {
+		this(Tools.listIt(new Pair<MIND, Integer>(m, c)), being);
 	}
 
 	/**

@@ -9,15 +9,15 @@ import shakti.winter.winter.Mind;
 import shakti.winter.operator.UnaryOperator;
 import shakti.winter.tools.Tools;
 
-public class Tree extends Branch<Boolean, Boolean> implements Mind{
+public class WinterTree extends Branch<Boolean, Boolean> implements Mind{
 	
-	private static final Logger log = LogManager.getLogger(Tree.class);
+	private static final Logger log = LogManager.getLogger(WinterTree.class);
 	
 	//TODO: move this first concept out of this class
 	//if this is the first Tree, then mutations will be completely random
 	boolean first; 
 	
-	public Tree(boolean first) {
+	public WinterTree(boolean first) {
 		super(new UnaryOperator<Boolean, Boolean>("->", Boolean.class, Boolean.class) {
 			@Override
 			public Boolean act(Boolean b) {
@@ -32,7 +32,7 @@ public class Tree extends Branch<Boolean, Boolean> implements Mind{
 		
 	}
 	
-	public Tree() {
+	public WinterTree() {
 		this(true);
 	}
 
@@ -48,13 +48,13 @@ public class Tree extends Branch<Boolean, Boolean> implements Mind{
 		// Don't modify first - at least for now (the first one is mutated multiple times to start,
 		// so just keep first as true and make all subsequent ones !first)
 		if (first) {
-			return new Tree(false);
+			return new WinterTree(false);
 		} else {
 			return mutantCopy();
 		}
 	}
 	
-	private Tree mutantCopy() {
+	private WinterTree mutantCopy() {
 		//TODO: fix it
 		return this;	
 	}

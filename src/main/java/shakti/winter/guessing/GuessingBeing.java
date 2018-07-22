@@ -6,14 +6,18 @@ import shakti.winter.core.Being;
 import shakti.winter.winter.Mind;
 import shakti.winter.winter.WinterBeing;
 
-public class GuessingBeing extends Being<GuessingBeing>{
+public class GuessingBeing extends Being<GuessTree, GuessingBeing>{
+	
+	int topBorder, bottomBorder;
 
-	public GuessingBeing(Mind m) {
+	public GuessingBeing(GuessTree m) {
 		super(m);
+		topBorder = 100;
+		bottomBorder = 0;
 	}
 
 	@Override
-	public GuessingBeing create(Mind m) {
+	public GuessingBeing create(GuessTree m) {
 		return new GuessingBeing(m);
 	}
 
@@ -30,6 +34,18 @@ public class GuessingBeing extends Being<GuessingBeing>{
 	}
 	
 	public int guess(int answer) {
-		return 7;
+		int guess = mind.guess(topBorder, bottomBorder);
+		if (answer > guess) {
+			if (guess > bottomBorder) {
+				bottomBorder = guess;
+			}
+		} else if (answer < guess) {
+			if (guess < topBorder) {
+				topBorder = guess;
+			}			
+		} else {
+			
+		}
+		return guess;
 	}
 }
