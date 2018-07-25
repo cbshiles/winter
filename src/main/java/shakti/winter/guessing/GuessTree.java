@@ -1,6 +1,11 @@
 package shakti.winter.guessing;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import shakti.winter.core.Driver;
 import shakti.winter.operator.UnaryOperator;
+import shakti.winter.tools.RunException;
 import shakti.winter.tools.Tools;
 import shakti.winter.tree.Branch;
 import shakti.winter.tree.Kiosk;
@@ -9,6 +14,8 @@ import shakti.winter.tree.WinterTree;
 import shakti.winter.winter.Mind;
 
 public class GuessTree  extends Branch<Integer, Integer> implements Mind{
+	
+	private static final Logger log = LogManager.getLogger(GuessTree.class);
 	
 	public boolean first;
 	
@@ -33,8 +40,7 @@ public class GuessTree  extends Branch<Integer, Integer> implements Mind{
 
 	@Override
 	public boolean decide(int potatoes, int turnsLeft) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new RunException("Guess trees don't decide");
 	}
 
 	@Override
@@ -49,9 +55,10 @@ public class GuessTree  extends Branch<Integer, Integer> implements Mind{
 	}
 	
 	int guess(int topBorder, int bottomBorder){
-		Kiosk.updateVars(topBorder, bottomBorder);
-		//log.info(this);
-		return pull();
+		Kiosk.updateGuessingVars(topBorder, bottomBorder);
+		int ans = pull();
+		//log.info(this+" -> "+topBorder+" : "+bottomBorder+" : "+ans);
+		return ans;
 	}
 	
 	private GuessTree mutantCopy() {

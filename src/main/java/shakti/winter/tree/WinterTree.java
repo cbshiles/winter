@@ -38,7 +38,7 @@ public class WinterTree extends Branch<Boolean, Boolean> implements Mind{
 
 	@Override
 	public boolean decide(int turnsLeft, int potatoes) {
-		Kiosk.updateVars(turnsLeft, potatoes);
+		Kiosk.updateWinterVars(turnsLeft, potatoes);
 		//log.info(this);
 		return pull();
 	}

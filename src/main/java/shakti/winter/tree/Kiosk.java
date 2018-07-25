@@ -34,8 +34,8 @@ public class Kiosk {
 	
 	//not including boolean constants (True, False) in the kiosk
 	
-	public static Leaf<Integer> turnsLeft = new Leaf<>("turnsLeft");
-	public static Leaf<Integer> potatoes = new Leaf<>("potatoes");
+	public static Map<String, Variable<?>> variableMap = new HashMap<>();
+	
 	public static AccMap<String, Operator<?, ?>> argMap = new AccMap<>();
 	public static AccMap<String, Operator<?, ?>> retMap = new AccMap<>();
 	public static AccMap<String, Leaf<?>> constantMap = new AccMap<>();
@@ -45,8 +45,6 @@ public class Kiosk {
 		for (int i=0; i<13; i++) {
 			constantMap.put(Integer.class.getName(), new Leaf<Integer>(i));
 		}
-		constantMap.put(Integer.class.getName(), turnsLeft);
-		constantMap.put(Integer.class.getName(), potatoes);
 		
 		constantMap.put(Boolean.class.getName(), new Leaf<Boolean>(true));
 		constantMap.put(Boolean.class.getName(), new Leaf<Boolean>(false));
@@ -62,9 +60,23 @@ public class Kiosk {
 		}
 	}
 	
-	public static void updateVars(int turns, int pots) {
-		turnsLeft.update(turns);
-		potatoes.update(pots);
+	public static <T> void addVar(Variable<T> var) {
+		constantMap.put(var.className(), var.leaf);
+		variableMap.put(var.name, var);
+	}
+	
+	public static <T> void updateVar(String name, T value) {
+		((Leaf<T>) variableMap.get(name).leaf).update(value);
+	}
+	
+	public static void updateWinterVars(int turns, int pots) {
+		updateVar("turnsLeft", turns);
+		updateVar("potatoes", pots);
+	}
+
+	public static void updateGuessingVars(int topBorder, int bottomBorder) {
+		updateVar("topBorder", topBorder);
+		updateVar("bottomBorder", bottomBorder);
 	}
 	
 	public static <ARG> Node<ARG> kid(Class<ARG> argClass) {
@@ -76,7 +88,6 @@ public class Kiosk {
 	}
 	
 	public static <ARG> List<Node<ARG>> kidList(int n, Class<ARG> argClass) {
-		
 		List<Node<ARG>> kids = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			kids.add(kid(argClass));

@@ -18,7 +18,11 @@ public class GuessingBeing extends Being<GuessTree, GuessingBeing>{
 
 	@Override
 	public GuessingBeing create(GuessTree m) {
-		return new GuessingBeing(m);
+		GuessingBeing bean = null;
+		while (bean == null || !bean.mind.isVariable()) {
+			bean = new GuessingBeing(new GuessTree(false));
+		}
+		return bean;
 	}
 
 	@Override
