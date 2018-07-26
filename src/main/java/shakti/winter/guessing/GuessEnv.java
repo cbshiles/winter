@@ -6,12 +6,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import shakti.winter.core.Driver;
+import shakti.winter.core.ConfigEnv;
 import shakti.winter.core.Environment;
 import shakti.winter.rand.Randomizer;
 import shakti.winter.tools.Pair;
-import shakti.winter.winter.ConfigEnv;
-import shakti.winter.winter.Mind;
 
 public class GuessEnv extends Environment<GuessTree, GuessingBeing>{
 	

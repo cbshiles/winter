@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shakti.winter.core.Being;
-import shakti.winter.tree.WinterTree;
+import shakti.winter.tree.Kiosk;
 
 public class WinterBeing extends Being<WinterTree, WinterBeing> {
 
@@ -19,11 +19,11 @@ public class WinterBeing extends Being<WinterTree, WinterBeing> {
     /**
      * Method for being to make a decision. Really just passes info to the Mind and then acts out the Mind's decision.
      */
-    @Override
     public void act(int turnsLeft) {
-	warmth += mind.decide(turnsLeft, potatoes) ?
-	    (potatoes++ / 3) : //pick
-	    1 + (potatoes / 2); //huddle
+		Kiosk.updateWinterVars(turnsLeft, potatoes);
+		warmth += mind.decide() ?
+				(potatoes++ / 3) : // pick
+				1 + (potatoes / 2); // huddle
     }
 
     /**

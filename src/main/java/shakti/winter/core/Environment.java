@@ -1,15 +1,16 @@
 package shakti.winter.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import shakti.winter.tools.*;
-import shakti.winter.winter.ConfigEnv;
-import shakti.winter.winter.Mind;
+import shakti.winter.tools.Pair;
+import shakti.winter.tools.Tools;
+import shakti.winter.tree.Mind;
 
-public abstract class Environment<MIND extends Mind, BEING extends Being<MIND, BEING>> {
+public abstract class Environment<MIND extends Mind<?>, BEING extends Being<MIND, BEING>> {
 
 	private static final Logger log = LogManager.getLogger(Environment.class);
 

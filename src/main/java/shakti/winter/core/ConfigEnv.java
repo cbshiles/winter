@@ -1,4 +1,4 @@
-package shakti.winter.winter;
+package shakti.winter.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,11 +17,10 @@ public class ConfigEnv {
     private int last;
 
     public int getTurns(){
-    	//turnFlag = !turnFlag;
     	int rand;
     	while ((rand = Randomizer.getInt(1, 25)) == last) {;}
     	log.info(rand);
-    	return  last = rand;//turnFlag?5:40;
+    	return  last = rand;
     }
     
     public int getGuessingTurns() {

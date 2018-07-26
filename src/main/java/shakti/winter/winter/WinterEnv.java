@@ -7,10 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import shakti.winter.core.Being;
+import shakti.winter.core.ConfigEnv;
 import shakti.winter.core.Environment;
 import shakti.winter.guessing.GuessTree;
 import shakti.winter.tools.Pair;
-import shakti.winter.tree.WinterTree;
 
 public class WinterEnv extends Environment<WinterTree, WinterBeing>{
 	

@@ -1,15 +1,17 @@
-package shakti.winter.tree;
+package shakti.winter.winter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import shakti.winter.core.Environment;
 import shakti.winter.tree.Branch;
-import shakti.winter.winter.Mind;
+import shakti.winter.tree.Kiosk;
+import shakti.winter.tree.Leaf;
+import shakti.winter.tree.Mind;
 import shakti.winter.operator.UnaryOperator;
 import shakti.winter.tools.Tools;
 
-public class WinterTree extends Branch<Boolean, Boolean> implements Mind{
+public class WinterTree extends Branch<Boolean, Boolean> implements Mind<Boolean>{
 	
 	private static final Logger log = LogManager.getLogger(WinterTree.class);
 	
@@ -35,16 +37,21 @@ public class WinterTree extends Branch<Boolean, Boolean> implements Mind{
 	public WinterTree() {
 		this(true);
 	}
-
+	
+    /**
+     * The method called each turn on each Mind in a living Being to see what action the Being will take. The question that is being
+     * decided is 'Am I going to pick up a hot potato this turn? So if this method returns true, the Being will pick up a potato, otherwise the Being will huddle.
+     * @param potatoes The number of potatoes this being has before the decision.
+     * @param turnsLeft The number of turns before Winter, not including the current one.
+     * @return True for pick up potatoe, false for huddle.
+     */
 	@Override
-	public boolean decide(int turnsLeft, int potatoes) {
-		Kiosk.updateWinterVars(turnsLeft, potatoes);
-		//log.info(this);
+	public Boolean decide() {
 		return pull();
 	}
 
 	@Override
-	public Mind mutate() {
+	public Mind<Boolean> mutate() {
 		// Don't modify first - at least for now (the first one is mutated multiple times to start,
 		// so just keep first as true and make all subsequent ones !first)
 		if (first) {

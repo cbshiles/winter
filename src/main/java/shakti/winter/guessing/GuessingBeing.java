@@ -3,8 +3,7 @@ package shakti.winter.guessing;
 import java.util.List;
 
 import shakti.winter.core.Being;
-import shakti.winter.winter.Mind;
-import shakti.winter.winter.WinterBeing;
+import shakti.winter.tree.Kiosk;
 
 public class GuessingBeing extends Being<GuessTree, GuessingBeing>{
 	
@@ -26,19 +25,14 @@ public class GuessingBeing extends Being<GuessTree, GuessingBeing>{
 	}
 
 	@Override
-	public void act(int turnsLeft) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public List<GuessingBeing> mutate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public int guess(int answer) {
-		int guess = mind.guess(topBorder, bottomBorder);
+		Kiosk.updateGuessingVars(topBorder, bottomBorder);
+		int guess = mind.decide();
 		if (answer > guess) {
 			if (guess > bottomBorder) {
 				bottomBorder = guess;

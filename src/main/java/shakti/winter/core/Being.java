@@ -1,8 +1,8 @@
 package shakti.winter.core;
 
-import java.util.*;
+import java.util.List;
 
-import shakti.winter.winter.Mind;
+import shakti.winter.tree.Mind;
 
 /**
  * Wrapper class for Minds. In Winter, all beings are the same, it is only the Mind inside that changes. Also stores data the minds shouldn't be able to directly modify, such as warmth and potatoes.
@@ -19,8 +19,6 @@ public abstract class Being<MIND extends Mind, BEING extends Being<MIND, BEING>>
     }
     
     public abstract BEING create(MIND m);
-    
-    public abstract void act(int turnsLeft);
     
     public abstract  List<BEING> mutate();
 
